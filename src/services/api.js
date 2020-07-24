@@ -42,7 +42,7 @@ async function getProductsFromCategory(categoryId) {
 }
 
 /* pesquisa por termo */
-async function getProductsFromCategory(query) {
+async function getProductsFromQuery(query) {
   const q = `${apiUrl.query}${query}`;
   return new Promise((resolved, rejected) => {
     fetchUrl(q, async (err, meta, data) => {
@@ -56,4 +56,5 @@ export {
   getCategories,
   getProductsFromCategoryAndQuery,
   getProductsFromCategory,
+  getProductsFromQuery,
 };
