@@ -1,4 +1,4 @@
-import { fetchUrl } from 'fetch';
+/* import { fetchUrl } from 'fetch';
 
 const apiUrl = {
   // Busca as categorias
@@ -19,7 +19,7 @@ async function getCategories() {
   });
 }
 
-/* Pesquisa por termo e categoria */
+//  Pesquisa por termo e categoria
 async function getProductsFromCategoryAndQuery(categoryId, query) {
   const q = `${apiUrl.catId}${categoryId}&q=${query}`;
   return new Promise((resolved, rejected) => {
@@ -30,7 +30,7 @@ async function getProductsFromCategoryAndQuery(categoryId, query) {
   });
 }
 
-/* Pesquisa por categoria */
+//  Pesquisa por categoria 
 async function getProductsFromCategory(categoryId) {
   const q = `${apiUrl.catId}${categoryId}`;
   return new Promise((resolved, rejected) => {
@@ -41,7 +41,7 @@ async function getProductsFromCategory(categoryId) {
   });
 }
 
-/* pesquisa por termo */
+// * pesquisa por termo 
 async function getProductsFromQuery(query) {
   const q = `${apiUrl.query}${query}`;
   return new Promise((resolved, rejected) => {
@@ -57,4 +57,25 @@ export {
   getProductsFromCategoryAndQuery,
   getProductsFromCategory,
   getProductsFromQuery,
-};
+}; */
+
+//  Busca de Categories já declarada dentro de GetCategories
+export async function getCategories() {
+  const apiUrl = 'https://api.mercadolibre.com/sites/MLB/categories';
+  const fetchResult = fetch(apiUrl).then((response) => response.json());
+  return fetchResult;
+}
+
+//  Busca de id e query declaradas dentro da função
+export async function getProductsFromCategoryAndQuery(categoryId, query) {
+  let apiUrl;
+  if (categoryId)
+    apiUrl = `https://api.mercadolibre.com/sites/MLB/search?category=${categoryId}`;
+  else if (query)
+    apiUrl = `https://api.mercadolibre.com/sites/MLB/search?q=${query}`;
+  else
+    apiUrl = `https://api.mercadolibre.com/sites/MLB/search?category=${categoryId}_ID&q=${query}`;
+  const fetchResult = fetch(apiUrl).then((response) => response.json());
+  return fetchResult;
+}
+//  Nota para lizzard, código corrigido com auxílio do felipe para diminuir complexidade
