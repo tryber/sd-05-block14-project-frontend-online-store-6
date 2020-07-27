@@ -12,9 +12,10 @@ class Categories extends React.Component {
 
   componentDidMount() {
     Api.getCategories().then((responseList) => {
-      this.setState(
-        { isLoading: false, categoriesList: responseList, }
-      );
+      this.setState({
+        isLoading: false,
+        categoriesList: responseList,
+      });
     });
   }
 
