@@ -1,11 +1,17 @@
-/* eslint-disable linebreak-style */
 import React from 'react';
 import './App.css';
 import ProductList from './ProductList';
+import Categories from './components/Categories';
 
-//  implementar na div após terminar requisitos 1 ao 3
 function App() {
-  return <div className="App"></div>;
+  return (
+    <div className="app">
+      <form className="categories">
+        <p>Categorias:</p>
+        <Categories />
+      </form>
+    </div>
+  );
 }
 
 export default App;
