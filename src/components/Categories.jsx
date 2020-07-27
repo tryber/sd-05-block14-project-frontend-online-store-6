@@ -16,7 +16,7 @@ class Categories extends React.Component {
         {
           isLoading: false,
           categoriesList: responseList,
-        }
+        };
       );
     });
   }
