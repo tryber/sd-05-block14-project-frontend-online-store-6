@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 import React from 'react';
 import './App.css';
 import ProductList from './ProductList';
