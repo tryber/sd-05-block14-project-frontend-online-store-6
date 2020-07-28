@@ -6,6 +6,8 @@ import Categories from './components/Categories';
 import ShoppingCart from './pages/ShoppingCart';
 import svg from './img/shopping-cart.svg';
 
+import Categories from './components/Categories';
+
 function App() {
   return (
     <div className="app">
