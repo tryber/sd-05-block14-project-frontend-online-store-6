@@ -1,3 +1,10 @@
+.cart-img {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  max-height: 25px;
+}
+
 .App {
   text-align: center;
 }
