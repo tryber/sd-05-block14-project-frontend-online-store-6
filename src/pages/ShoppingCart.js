@@ -16,9 +16,8 @@ class ShoppingCart extends React.Component {
           Seu carrinho está vazio
         </div>
       );
-    } else {
-      return <div>Carrinho de Compras</div>;
     }
+    return <div>Carrinho de Compras</div>;
   }
 }
 
