@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import ProductList from './ProductList';
+//import ProductList from './ProductList';
 import Categories from './components/Categories';
 
 function App() {
