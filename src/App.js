@@ -23,7 +23,7 @@ function App() {
         </div>
         {/* Switch indica para qual componente/página enviar o Link */}
         <Switch>
-          <Route path="/" component={ProductList} />
+          <Route exact path="/" component={ProductList} />
           <Route path="/ShoppingCart" component={ShoppingCart} />
         </Switch>
       </Router>
