@@ -1,12 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import './App.css';
-// import ProductList from './ProductList';
+import ProductList from './ProductList';
 import Categories from './components/Categories';
 import ShoppingCart from './pages/ShoppingCart';
 import svg from './img/shopping-cart.svg';
-
-// force CC
 
 function App() {
   return (
@@ -25,6 +23,7 @@ function App() {
         </div>
         {/* Switch indica para qual componente/página enviar o Link */}
         <Switch>
+          <Route path="/" component={ProductList} />
           <Route path="/ShoppingCart" component={ShoppingCart} />
         </Switch>
       </Router>
