@@ -6,24 +6,30 @@ import './SearchBar.css';
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { query: '' };
+    this.state = {query: null};
     this.timer = {};
     this.handleOnInputChange = this.handleOnInputChange.bind(this);
   }
 
   handleOnInputChange(event) {
     const query = event.target.value;
-    const { onSearch } = this.props;
     clearTimeout(this.timer);
+    this.setState({ query });
     this.timer = setTimeout(() => {
-      Api
-        /* Você esqueceu de passar os parâmentros aqui!
-        Por isso tava dando erro */
-        .getProductsFromCategoryAndQuery(false, query)
-        .then((response) => {
-          onSearch(response.results);
-        });
-    }, 500);
+      this.startSearch();
+    },
+    500);
+  }
+
+  startSearch() {
+    const { onSearch, categoryFilter } = this.props;
+    const { query } = this.state;
+    console.log(query, categoryFilter);
+    Api
+      .getProductsFromCategoryAndQuery(categoryFilter, query)
+      .then((response) => {
+        onSearch(response.results);
+      });
   }
 
   render() {
@@ -40,12 +46,17 @@ class SearchBar extends React.Component {
               this.handleOnInputChange(event);
             }}
           />
-          <img
+          <button
+            type="button"
             className="search-icon"
-            src={SearchIcon}
-            alt="Search Icon"
-            data-testid="query-button"
-          />
+            onClick={() => {this.startSearch()}}
+          >
+            <img
+              src={SearchIcon}
+              alt="Search Icon"
+              data-testid="query-button"
+            />
+          </button>
         </label>
       </div>
     );

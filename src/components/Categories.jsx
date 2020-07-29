@@ -8,6 +8,7 @@ class Categories extends React.Component {
       isLoading: true,
       categoriesList: [],
     };
+    this.changeCategory = this.changeCategory.bind(this);
   }
 
   componentDidMount() {
@@ -17,6 +18,11 @@ class Categories extends React.Component {
         categoriesList: responseList,
       });
     });
+  }
+
+  changeCategory(ev) {
+    const { onChangeCategory } = this.props;
+    onChangeCategory(ev.target.value);
   }
 
   render() {
@@ -30,6 +36,7 @@ class Categories extends React.Component {
           name="category"
           data-testid="category"
           value={category.id}
+          onChange={this.changeCategory}
         />
         {category.name}
       </label>

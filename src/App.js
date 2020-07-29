@@ -9,12 +9,20 @@ import SearchBar from './components/SearchBar';
 class App extends React.Component {
   constructor() {
     super();
-    this.state = { productList: [] };
+    this.state = {
+      productList: [],
+      selectedCategory: null,
+    };
     this.mountProductList = this.mountProductList.bind(this);
+    this.changeCategories = this.changeCategories.bind(this);
   }
 
   mountProductList(products) {
     this.setState({ productList: products });
+  }
+
+  changeCategories(category) {
+    this.setState({ selectedCategory: category });
   }
 
   /* Substituir a função abaixo por um componente ou page */
@@ -35,17 +43,20 @@ class App extends React.Component {
   }
 
   render() {
+    const { selectedCategory } = this.state;
     return (
       <div className="app">
         <Router>
           <form className="categories">
             <p>Categorias:</p>
-            <Categories />
+            <Categories onChangeCategory={this.changeCategories}/>
           </form>
           <div className="page-content">
             <div className="main-page">
-              {/* O SearchBar agora tem um prop que recebe o callback dos resultados */}
-              <SearchBar onSearch={(res) => { this.mountProductList(res); }} />
+              <SearchBar
+                categoryFilter={selectedCategory}
+                onSearch={(res) => { this.mountProductList(res); }}
+              />
               <Link
                 className="cart-button"
                 data-testid="shopping-cart-button"
