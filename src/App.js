@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import * as Api from './services/api';
+
 import ProductList from './pages/ProductList';
 import Categories from './components/Categories';
 import ShoppingCart from './pages/ShoppingCart';
@@ -11,48 +13,42 @@ class App extends React.Component {
     super();
     this.state = {
       productList: [],
+      currentQuery: null,
       selectedCategory: null,
     };
     this.mountProductList = this.mountProductList.bind(this);
-    this.changeCategories = this.changeCategories.bind(this);
+    this.changeCategoriesAndQueries = this.changeCategoriesAndQueries.bind(this);
   }
 
-  mountProductList(products) {
-    this.setState({ productList: products });
+  mountProductList() {
+    const {selectedCategory, currentQuery} = this.state;
+    Api
+      .getProductsFromCategoryAndQuery(selectedCategory, currentQuery)
+      .then((products) => {
+        this.setState({ productList: products.results });
+      });
   }
 
-  changeCategories(category) {
-    this.setState({ selectedCategory: category });
-  }
-
-  /* Substituir a função abaixo por um componente ou page */
-  productsElement() {
-    const { productList } = this.state;
-    if (productList.length > 0) {
-      return productList.map((product) => (
-        <div key={product.id} className="card" data-testid="product">
-          <div className="card-header">{ product.title }</div>
-          <div className="card-body">
-            <img src={product.thumbnail} alt="Product" />
-            <p>{`R$ ${Number(product.price).toFixed(2)}`}</p>
-          </div>
-        </div>
-      ));
-    }
-    return (<div>Você ainda não realizou uma busca</div>);
+  changeCategoriesAndQueries(category, query) {
+    const { currentQuery, selectedCategory } = this.state;
+    this.setState({
+      currentQuery: query || currentQuery,
+      selectedCategory: category || selectedCategory,
+    });
+    this.mountProductList();
   }
 
   render() {
-    const { selectedCategory } = this.state;
+    const { selectedCategory, productList } = this.state;
     return (
       <div className="app">
         <Router>
-          <Categories onChangeCategory={this.changeCategories} />
+          <Categories onChangeCategory={this.changeCategoriesAndQueries} />
           <div className="page-content">
             <div className="main-page">
               <SearchBar
                 categoryFilter={selectedCategory}
-                onSearch={(res) => { this.mountProductList(res); }}
+                onSearch={this.changeCategoriesAndQueries}
               />
               <Link
                 className="cart-button"
@@ -63,12 +59,13 @@ class App extends React.Component {
               </Link>
             </div>
             <Switch>
-              <Route exact path="/" component={ProductList} />
+              <Route
+                exact
+                path="/"
+                render={(attr) => <ProductList {...attr} list={productList} />}
+              />
               <Route path="/ShoppingCart" component={ShoppingCart} />
             </Switch>
-            <div className="product-list">
-              {this.productsElement()}
-            </div>
           </div>
         </Router>
       </div>

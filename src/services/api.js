@@ -14,9 +14,9 @@ export async function getCategories() {
 // Busca de id e query declaradas dentro da função
 export async function getProductsFromCategoryAndQuery(categoryId, query) {
   let apiUrl;
-  if (!categoryId && query) apiUrl = `${endpoint.productsQuery}${query}`;
-  else if (categoryId && !query) apiUrl = `${endpoint.productsCat}${categoryId}`;
-  else apiUrl = `${endpoint.productsCat}${categoryId}_ID&q=${query}`;
+  if (categoryId && query) apiUrl = `${endpoint.productsCat}${categoryId}&q=${query}`;
+  else if (!categoryId && query) apiUrl = `${endpoint.productsQuery}${query}`;
+  else apiUrl = `${endpoint.productsCat}${categoryId}`;
   return fetch(apiUrl)
     .then((response) => response.json())
     .catch(() => false);

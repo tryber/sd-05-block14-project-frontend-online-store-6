@@ -1,6 +1,5 @@
 import React from 'react';
 import SearchIcon from '../img/searching-icon.svg';
-import * as Api from '../services/api';
 import './SearchBar.css';
 
 class SearchBar extends React.Component {
@@ -22,14 +21,9 @@ class SearchBar extends React.Component {
   }
 
   startSearch() {
-    const { onSearch, categoryFilter } = this.props;
+    const { onSearch } = this.props;
     const { query } = this.state;
-    console.log(query, categoryFilter);
-    Api
-      .getProductsFromCategoryAndQuery(categoryFilter, query)
-      .then((response) => {
-        onSearch(response.results);
-      });
+    onSearch(null, query);
   }
 
   render() {
