@@ -5,6 +5,7 @@ import './App.css';
 import Categories from './components/Categories';
 import ShoppingCart from './pages/ShoppingCart';
 import svg from './img/shopping-cart.svg';
+import SearchBar from './components/SearchBar';
 
 function App() {
   return (
@@ -12,6 +13,8 @@ function App() {
       {/* Criando link de acesso as paginas */}
       <Router>
         <div className="main-page">
+          {/* Teste de input */}
+          <SearchBar />
           {/* Link de acesso ao ShoppingCart que funciona como Button */}
           <Link
             className="cart-button"
