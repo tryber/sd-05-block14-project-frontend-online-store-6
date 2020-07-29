@@ -40,7 +40,12 @@ class SearchBar extends React.Component {
               this.handleOnInputChange(event);
             }}
           />
-          <img className="search-icon" src={SearchIcon} alt="Search Icon" />
+          <img
+            className="search-icon"
+            src={SearchIcon}
+            alt="Search Icon"
+            data-testid="query-button"
+          />
         </label>
       </div>
     );
