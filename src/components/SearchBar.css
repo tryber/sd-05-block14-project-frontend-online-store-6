@@ -1,0 +1,32 @@
+.container {
+  max-width: 800px;
+  width: 90%;
+}
+
+.search-label {
+  align-items: center;
+  display: flex;
+  position: relative;
+}
+
+.container input {
+  box-sizing: border-box;
+  color: #444;
+  font-size: 36px;
+  font-style: italic;
+  padding: 16px;
+  width: 100%;
+}
+
+.search-icon {
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  height: 48px;
+  margin-left: -60px;
+  width: 48px;
+}
+
+.search-icon img {
+  height: 25px;
+}
