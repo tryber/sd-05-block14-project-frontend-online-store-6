@@ -9,22 +9,25 @@ class SearchBar extends React.Component {
 
     this.state = {
       query: '',
-      results: {},
-      loading: false,
-      message: '',
     };
     this.timer = {};
+    this.handleOnInputChange = this.handleOnInputChange.bind(this)
+
   }
-  //  função para mudar paginas de busca
-  handleOnInputChange = (event) => {
+ 
+  //  função para busca
+  handleOnInputChange(event) {
     const query = event.target.value;
+    const { onSearch } = this.props;
     clearTimeout(this.timer);
     this.timer = setTimeout(() => {
-      Api.getProductsFromCategoryAndQuery().then((response) => {
-        console.log(response); /*faz a busca mas quando tento definir query 
-        ele ou retorna como undefined com query comentado ou quando tento settar ele
-        para de aparecer o input de text na barra e n faz nada*/
-      });
+      Api
+        /* Você esqueceu de passar os parâmentros aqui!
+        Por isso tava dando erro */
+        .getProductsFromCategoryAndQuery(false, query)
+        .then((response) => {
+          onSearch(response.results);
+        });
     }, 500);
   };
 
@@ -32,12 +35,10 @@ class SearchBar extends React.Component {
     const { query } = this.state;
     return (
       <div className="container">
-        {/*Search Input*/}
         <label className="search-label" htmlFor="search-input">
           <input
             type="text"
             name="query"
-            // value={query}
             id="search-input"
             placeholder="Search Products..."
             onChange={(event) => {
