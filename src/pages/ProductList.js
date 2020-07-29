@@ -23,7 +23,6 @@ class ProductList extends React.Component {
   }
 
   render() {
-
     return (
       //  implementando espaço de busca
       <div>

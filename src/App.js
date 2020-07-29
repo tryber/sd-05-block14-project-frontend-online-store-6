@@ -59,12 +59,11 @@ class App extends React.Component {
               </Link>
             </div>
             <Switch>
+              <Route path="/ShoppingCart" component={ShoppingCart} />
               <Route
-                exact
                 path="/"
                 render={(attr) => <ProductList {...attr} list={productList} />}
               />
-              <Route path="/ShoppingCart" component={ShoppingCart} />
             </Switch>
           </div>
         </Router>
