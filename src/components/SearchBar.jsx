@@ -44,11 +44,11 @@ class SearchBar extends React.Component {
             type="button"
             className="search-icon"
             onClick={() => { this.startSearch(); }}
+            data-testid="query-button"
           >
             <img
               src={SearchIcon}
               alt="Search Icon"
-              data-testid="query-button"
             />
           </button>
         </label>
