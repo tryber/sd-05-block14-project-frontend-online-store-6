@@ -31,6 +31,7 @@ class SearchBar extends React.Component {
       <div className="container">
         <label className="search-label" htmlFor="search-input">
           <input
+            data-testid="query-input"
             type="text"
             name="query"
             id="search-input"
