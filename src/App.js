@@ -49,7 +49,7 @@ class App extends React.Component {
         <Router>
           <form className="categories">
             <p>Categorias:</p>
-            <Categories onChangeCategory={this.changeCategories}/>
+            <Categories onChangeCategory={this.changeCategories} />
           </form>
           <div className="page-content">
             <div className="main-page">
@@ -69,12 +69,9 @@ class App extends React.Component {
               <Route exact path="/" component={ProductList} />
               <Route path="/ShoppingCart" component={ShoppingCart} />
             </Switch>
-
-            {/* Os resultados são impressos dentro dessa div */}
             <div className="product-list">
               {this.productsElement()}
             </div>
-
           </div>
         </Router>
       </div>

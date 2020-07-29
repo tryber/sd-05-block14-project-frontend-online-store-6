@@ -6,7 +6,7 @@ import './SearchBar.css';
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {query: null};
+    this.state = { query: null };
     this.timer = {};
     this.handleOnInputChange = this.handleOnInputChange.bind(this);
   }
@@ -49,7 +49,7 @@ class SearchBar extends React.Component {
           <button
             type="button"
             className="search-icon"
-            onClick={() => {this.startSearch()}}
+            onClick={() => { this.startSearch(); }}
           >
             <img
               src={SearchIcon}
