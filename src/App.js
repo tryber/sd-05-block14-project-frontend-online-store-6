@@ -26,9 +26,9 @@ class App extends React.Component {
     Api.getProductsFromCategoryAndQuery(selectedCategory, currentQuery).then(
       (products) => {
         this.setState({ productList: products.results });
-      }
+      },
     );
-  };
+  }
 
   changeCategoriesAndQueries(category, query) {
     const { currentQuery, selectedCategory } = this.state;
