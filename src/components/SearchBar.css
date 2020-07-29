@@ -1,0 +1,26 @@
+.container {
+  max-width: 800px;
+  width: 90%;
+}
+
+.search-label {
+  position: relative;
+}
+
+.container input {
+  box-sizing: border-box;
+  color: #444;
+  font-size: 36px;
+  font-style: italic;
+  padding: 16px;
+  width: 100%;
+}
+
+.search-icon {
+  color: #555;
+  font-size: 24px;
+  height: 25px;
+  position: absolute;
+  right: 18px;
+  top: -10px;
+}
