@@ -28,19 +28,26 @@ class Categories extends React.Component {
   render() {
     const { isLoading, categoriesList } = this.state;
     if (isLoading) return <div>Loading...</div>;
-    return categoriesList.map((category) => (
-      <label htmlFor={category.id} key={category.name}>
-        <input
-          id={category.id}
-          type="radio"
-          name="category"
-          data-testid="category"
-          value={category.id}
-          onChange={this.changeCategory}
-        />
-        {category.name}
-      </label>
-    ));
+    return (
+      <form className="categories">
+        <p>Categorias:</p>
+        {
+          categoriesList.map((category) => (
+            <label htmlFor={category.id} key={category.name}>
+              <input
+                id={category.id}
+                type="radio"
+                name="category"
+                data-testid="category"
+                value={category.id}
+                onChange={this.changeCategory}
+              />
+              {category.name}
+            </label>
+          ))
+        }
+      </form>
+    );
   }
 }
 

@@ -47,10 +47,7 @@ class App extends React.Component {
     return (
       <div className="app">
         <Router>
-          <form className="categories">
-            <p>Categorias:</p>
-            <Categories onChangeCategory={this.changeCategories} />
-          </form>
+          <Categories onChangeCategory={this.changeCategories} />
           <div className="page-content">
             <div className="main-page">
               <SearchBar
