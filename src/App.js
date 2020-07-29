@@ -18,6 +18,7 @@ class App extends React.Component {
     };
     this.mountProductList = this.mountProductList.bind(this);
     this.changeCategoriesAndQueries = this.changeCategoriesAndQueries.bind(this);
+    this.elementProductList = this.elementProductList.bind(this);
   }
 
   mountProductList() {
@@ -38,8 +39,13 @@ class App extends React.Component {
     this.mountProductList();
   }
 
+  elementProductList(attr) {
+    const { productList } = this.state;
+    return <ProductList {...attr} list={productList} />;
+  }
+
   render() {
-    const { selectedCategory, productList } = this.state;
+    const { selectedCategory } = this.state;
     return (
       <div className="app">
         <Router>
@@ -59,11 +65,8 @@ class App extends React.Component {
               </Link>
             </div>
             <Switch>
+              <Route exact path="/" render={(attr) => this.elementProductList(attr)} />
               <Route path="/ShoppingCart" component={ShoppingCart} />
-              <Route
-                path="/"
-                render={(attr) => <ProductList {...attr} list={productList} />}
-              />
             </Switch>
           </div>
         </Router>
