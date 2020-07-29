@@ -21,7 +21,7 @@ class App extends React.Component {
   }
 
   mountProductList() {
-    const {selectedCategory, currentQuery} = this.state;
+    const { selectedCategory, currentQuery } = this.state;
     Api
       .getProductsFromCategoryAndQuery(selectedCategory, currentQuery)
       .then((products) => {
