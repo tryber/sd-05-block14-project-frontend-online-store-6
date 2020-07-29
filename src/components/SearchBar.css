@@ -1,7 +1,6 @@
-/*Container*/
 .container {
-	width: 90%;
-	max-width: 800px;
+  max-width: 800px;
+  width: 90%;
 }
 
 .search-label {
@@ -9,20 +8,19 @@
 }
 
 .container input {
-	width: 100%;
-	padding: 16px;
+	box-sizing: border-box;
+	color: #444;
 	font-size: 36px;
 	font-style: italic;
-	color: #444;
-	box-sizing: border-box;
-	outline: none;
+	padding: 16px;
+	width: 100%;
 }
 
 .search-icon {
+	color: #555;
+	font-size: 24px;
+	height: 25px;
 	position: absolute;
 	top: -10px;
-	font-size: 24px;
-	color: #555;
 	right: 18px;
-	height: 25px;
 }

@@ -6,16 +6,11 @@ import './SearchBar.css';
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      query: '',
-    };
+    this.state = { query: '' };
     this.timer = {};
-    this.handleOnInputChange = this.handleOnInputChange.bind(this)
-
+    this.handleOnInputChange = this.handleOnInputChange.bind(this);
   }
- 
-  //  função para busca
+
   handleOnInputChange(event) {
     const query = event.target.value;
     const { onSearch } = this.props;
@@ -29,10 +24,9 @@ class SearchBar extends React.Component {
           onSearch(response.results);
         });
     }, 500);
-  };
+  }
 
   render() {
-    const { query } = this.state;
     return (
       <div className="container">
         <label className="search-label" htmlFor="search-input">

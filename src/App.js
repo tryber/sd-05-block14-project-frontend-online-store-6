@@ -9,14 +9,11 @@ import SearchBar from './components/SearchBar';
 class App extends React.Component {
   constructor() {
     super();
-    this.state = {
-      productList: []
-    }
+    this.state = { productList: [] };
     this.mountProductList = this.mountProductList.bind(this);
   }
 
   mountProductList(products) {
-    console.log(products)
     this.setState({ productList: products });
   }
 
@@ -48,7 +45,7 @@ class App extends React.Component {
           <div className="page-content">
             <div className="main-page">
               {/* O SearchBar agora tem um prop que recebe o callback dos resultados */}
-              <SearchBar onSearch={(res) => {this.mountProductList(res)}} />
+              <SearchBar onSearch={(res) => { this.mountProductList(res); }} />
               <Link
                 className="cart-button"
                 data-testid="shopping-cart-button"
@@ -58,7 +55,7 @@ class App extends React.Component {
               </Link>
             </div>
             <Switch>
-              <Route exact path="/" component={ ProductList } />
+              <Route exact path="/" component={ProductList} />
               <Route path="/ShoppingCart" component={ShoppingCart} />
             </Switch>
 
