@@ -17,9 +17,7 @@ class App extends React.Component {
       selectedCategory: null,
     };
     this.mountProductList = this.mountProductList.bind(this);
-    this.changeCategoriesAndQueries = this.changeCategoriesAndQueries.bind(
-      this
-    );
+    this.changeCategoriesAndQueries = this.changeCategoriesAndQueries.bind(this);
     this.elementProductList = this.elementProductList.bind(this);
   }
 
@@ -30,7 +28,7 @@ class App extends React.Component {
         this.setState({ productList: products.results });
       }
     );
-  }
+  };
 
   changeCategoriesAndQueries(category, query) {
     const { currentQuery, selectedCategory } = this.state;

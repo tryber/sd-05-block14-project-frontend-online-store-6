@@ -20,7 +20,7 @@ class ProductList extends React.Component {
         <div key={product.id} className="card" data-testid="product">
           <div className="card-header">{product.title}</div>
           <a
-            href="#"
+            href="index.js:1"
             className="card-body"
             data-testid="product-detail-link"
             onClick={() => {
