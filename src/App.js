@@ -5,6 +5,7 @@ import ProductList from './ProductList';
 import Categories from './components/Categories';
 import ShoppingCart from './pages/ShoppingCart';
 import svg from './img/shopping-cart.svg';
+import FinishPurchase from './pages/FinishPurchase';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={ProductList} />
           <Route path="/ShoppingCart" component={ShoppingCart} />
+          <Route path="/pages/FinishPurchase" component={FinishPurchase} />
         </Switch>
       </Router>
       <form className="categories">
