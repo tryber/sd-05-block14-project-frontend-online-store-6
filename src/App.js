@@ -23,11 +23,11 @@ class App extends React.Component {
 
   mountProductList() {
     const { selectedCategory, currentQuery } = this.state;
-    Api
-      .getProductsFromCategoryAndQuery(selectedCategory, currentQuery)
-      .then((products) => {
+    Api.getProductsFromCategoryAndQuery(selectedCategory, currentQuery).then(
+      (products) => {
         this.setState({ productList: products.results });
-      });
+      },
+    );
   }
 
   changeCategoriesAndQueries(category, query) {
@@ -65,7 +65,7 @@ class App extends React.Component {
               </Link>
             </div>
             <Switch>
-              <Route exact path="/" render={(attr) => this.elementProductList(attr)} />
+              <Route exact path="/" render={this.elementProductList} />
               <Route path="/ShoppingCart" component={ShoppingCart} />
             </Switch>
           </div>
