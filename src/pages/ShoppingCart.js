@@ -43,11 +43,7 @@ class ShoppingCart extends React.Component {
             </div>
           ))
         }
-        <button
-          onClick={() => {CartSelection.removeAll()}}
-        >
-          Limpar carrinho
-        </button>
+        <button onClick={() => { CartSelection.removeAll(); }}>Limpar carrinho</button>
       </div>
     );
   }
