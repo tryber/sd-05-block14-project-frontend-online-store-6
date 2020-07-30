@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import CartSelection from '../services/cart';
-
+import Product from '../components/Product';
 
 class ShoppingCart extends React.Component {
   constructor(props) {
@@ -29,22 +29,7 @@ class ShoppingCart extends React.Component {
     }
     return (
       <div className="product-list">
-        {
-          products.map((product) => (
-            <div key={product.id} className="card" data-testid="product-add-to-cart">
-              <div className="card-header" data-testid="shopping-cart-product-name">
-                {product.title}
-              </div>
-              <div className="card-body">
-                <img src={product.thumbnail} alt="Product" />
-                <p>{`R$ ${Number(product.price).toFixed(2)}`}</p>
-              </div>
-              <div data-testid="shopping-cart-product-quantity">
-                10
-              </div>
-            </div>
-          ))
-        }
+        <Product />
         <Router>
           <Link to="/pages/FinishPurchase" data-testid="checkout-products">
             <button>Finalizar Compra</button>
