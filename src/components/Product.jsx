@@ -1,4 +1,4 @@
-import React from'react';
+import React from 'react';
 import CartSelection from '../services/cart';
 
 class Product extends React.Component {

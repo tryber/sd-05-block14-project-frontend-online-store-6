@@ -4,11 +4,6 @@ import CartSelection from '../services/cart';
 import Product from '../components/Product';
 
 class ShoppingCart extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { products: [] };
-    this.fillCart = this.fillCart.bind(this);
-  }
 
   componentDidMount() {
     this.fillCart(CartSelection.getItems());
