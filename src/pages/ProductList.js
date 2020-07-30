@@ -9,6 +9,16 @@ class ProductList extends React.Component {
     this.openDetails = this.openDetails.bind(this);
   }
 
+  addProductToCart (product) {
+    const item = {
+      id: product.id,
+      title: product.title,
+      price: product.price,
+      thumbnail: product.thumbnail
+    }
+    localStorage.setItem('depositório', JSON.stringify(item));
+  } 
+
   openDetails(detail) {
     this.setState({ product: detail });
   }
@@ -30,6 +40,9 @@ class ProductList extends React.Component {
             <img src={product.thumbnail} alt="Product" />
             <p>{`R$ ${Number(product.price).toFixed(2)}`}</p>
           </a>
+          <button onClick = {()=> {this.addProductToCart(product)}}>
+            Add to Cart
+          </button>
         </div>
       ));
     }
