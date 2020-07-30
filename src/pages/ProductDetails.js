@@ -1,4 +1,5 @@
 import React from 'react';
+import CartSelection from '../services/cart';
 
 class ProductDetails extends React.Component {
   render() {
@@ -10,6 +11,11 @@ class ProductDetails extends React.Component {
           <img src={product.thumbnail} alt={product.title} />
           {`R$${product.price}`}
         </p>
+        <button
+          data-testid="product-detail-add-to-cart"
+          onClick={() => { CartSelection.addItem(product); }}>
+            Add to cart
+        </button>
       </div>
     );
   }
