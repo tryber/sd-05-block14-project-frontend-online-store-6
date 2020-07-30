@@ -5,9 +5,9 @@ const cartSelection = {
       localStorage.setItem('depositório', '[]');
     }
   },
-  getItems: () => {
-    return JSON.parse(localStorage.getItem('depositório') || '[]');
-  },
+  getItems: () => (
+    JSON.parse(localStorage.getItem('depositório') || '[]')
+  ),
   addItem: (product) => {
     const item = {
       id: product.id,
@@ -21,7 +21,7 @@ const cartSelection = {
   },
   removeItem: (productId) => {
     const meuDepositorio = JSON.parse(localStorage.getItem('depositório'));
-    const newDepositorio = meuDepositorio.filter(({id}) => (id !== productId));
+    const newDepositorio = meuDepositorio.filter(({ id }) => (id !== productId));
     localStorage.setItem('depositório', JSON.stringify(newDepositorio));
   },
   removeAll: () => {
