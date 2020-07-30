@@ -17,6 +17,7 @@ class ProductDetails extends React.Component {
         >
             Add to cart
         </button>
+        <input type="textarea" data-testid="product-detail-evaluation" />
       </div>
     );
   }
