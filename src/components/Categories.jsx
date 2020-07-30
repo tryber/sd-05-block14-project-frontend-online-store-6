@@ -8,6 +8,7 @@ class Categories extends React.Component {
       isLoading: true,
       categoriesList: [],
     };
+    this.changeCategory = this.changeCategory.bind(this);
   }
 
   componentDidMount() {
@@ -19,21 +20,34 @@ class Categories extends React.Component {
     });
   }
 
+  changeCategory(ev) {
+    const { onChangeCategory } = this.props;
+    onChangeCategory(ev.target.value);
+  }
+
   render() {
     const { isLoading, categoriesList } = this.state;
     if (isLoading) return <div>Loading...</div>;
-    return categoriesList.map((category) => (
-      <label htmlFor={category.id} key={category.name}>
-        <input
-          id={category.id}
-          type="radio"
-          name="category"
-          data-testid="category"
-          value={category.id}
-        />
-        {category.name}
-      </label>
-    ));
+    return (
+      <form className="categories">
+        <p>Categorias:</p>
+        {
+          categoriesList.map((category) => (
+            <label htmlFor={category.id} key={category.name}>
+              <input
+                id={category.id}
+                type="radio"
+                name="category"
+                data-testid="category"
+                value={category.id}
+                onChange={this.changeCategory}
+              />
+              {category.name}
+            </label>
+          ))
+        }
+      </form>
+    );
   }
 }
 
