@@ -1,4 +1,5 @@
 import React from 'react';
+import CartSelection from '../services/cart'
 
 class ShoppingCart extends React.Component {
   constructor(props) {
@@ -8,9 +9,7 @@ class ShoppingCart extends React.Component {
   }
 
   componentDidMount() {
-    const cart = JSON.parse(localStorage.getItem('depositório') || '[]');
-    if (cart.length === 0) localStorage.setItem('depositório', '[]');
-    this.fillCart(cart);
+    this.fillCart(CartSelection.getItems());
   }
 
   fillCart(products) {
@@ -19,8 +18,6 @@ class ShoppingCart extends React.Component {
 
   render() {
     const { products } = this.state;
-    /* criando If/Else para mudar mensagem conforme conteudo no carrinho
-    esteja cheio ou vazio. */
     if (products.length === 0) {
       return (
         <div className="empty-cart" data-testid="shopping-cart-empty-message">

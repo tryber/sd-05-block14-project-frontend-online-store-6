@@ -1,18 +1,6 @@
 import React from 'react';
+import CartSelection from '../services/cart';
 import ProductDetails from './ProductDetails';
-
-function addProductToCart(product) {
-  const item = {
-    id: product.id,
-    title: product.title,
-    price: product.price,
-    thumbnail: product.thumbnail,
-  };
-
-  const meuDepositorio = JSON.parse(localStorage.getItem('depositório'));
-  meuDepositorio.push(item);
-  localStorage.setItem('depositório', JSON.stringify(meuDepositorio));
-}
 
 class ProductList extends React.Component {
   constructor(props) {
@@ -23,10 +11,7 @@ class ProductList extends React.Component {
   }
 
   componentDidMount() {
-    const cart = JSON.parse(localStorage.getItem('depositório') || '[]');
-    if (cart.length === 0) {
-      localStorage.setItem('depositório', '[]');
-    }
+    CartSelection.create();
   }
 
   openDetails(detail) {
@@ -53,7 +38,7 @@ class ProductList extends React.Component {
           <button
             type="button"
             data-testid="product-add-to-cart"
-            onClick={() => { addProductToCart(product); }}
+            onClick={() => { CartSelection.addItem(product); }}
           >
             Add to Cart
           </button>
@@ -67,7 +52,6 @@ class ProductList extends React.Component {
     const { product } = this.state;
     if (product) return <ProductDetails product={product} />;
     return (
-      //  implementando espaço de busca
       <div>
         <div data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
