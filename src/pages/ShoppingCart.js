@@ -50,6 +50,7 @@ class ShoppingCart extends React.Component {
             <button>Finalizar Compra</button>
           </Link>
         </Router>
+        <button onClick={() => { CartSelection.removeAll(); }}>Limpar carrinho</button>
       </div>
     );
   }
