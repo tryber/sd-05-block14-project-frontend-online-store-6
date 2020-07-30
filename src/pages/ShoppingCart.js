@@ -44,7 +44,7 @@ class ShoppingCart extends React.Component {
                 10
               </div>
             </div>
-          ));
+          ))
         }
       </div>
     )
