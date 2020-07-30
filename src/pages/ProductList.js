@@ -1,4 +1,5 @@
 import React from 'react';
+import CartSelection from '../services/cart';
 import ProductDetails from './ProductDetails';
 
 class ProductList extends React.Component {
@@ -7,6 +8,10 @@ class ProductList extends React.Component {
     this.state = { product: null };
     this.productsElement = this.productsElement.bind(this);
     this.openDetails = this.openDetails.bind(this);
+  }
+
+  componentDidMount() {
+    CartSelection.create();
   }
 
   openDetails(detail) {
@@ -30,6 +35,13 @@ class ProductList extends React.Component {
             <img src={product.thumbnail} alt="Product" />
             <p>{`R$ ${Number(product.price).toFixed(2)}`}</p>
           </a>
+          <button
+            type="button"
+            data-testid="product-add-to-cart"
+            onClick={() => { CartSelection.addItem(product); }}
+          >
+            Add to Cart
+          </button>
         </div>
       ));
     }
@@ -40,7 +52,6 @@ class ProductList extends React.Component {
     const { product } = this.state;
     if (product) return <ProductDetails product={product} />;
     return (
-      //  implementando espaço de busca
       <div>
         <div data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
