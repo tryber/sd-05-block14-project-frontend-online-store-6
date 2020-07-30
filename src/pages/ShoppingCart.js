@@ -1,7 +1,7 @@
 import React from 'react';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 import CartSelection from '../services/cart';
 
-import { BrowserRouter as Router, Link } from 'react-router-dom';
 
 class ShoppingCart extends React.Component {
   constructor(props) {
@@ -46,9 +46,9 @@ class ShoppingCart extends React.Component {
           ))
         }
         <Router>
-      <Link to="/pages/FinishPurchase" data-testid="checkout-products">
-        <button>Finalizar Compra</button>
-      </Link>
+          <Link to="/pages/FinishPurchase" data-testid="checkout-products">
+            <button>Finalizar Compra</button>
+          </Link>
         </Router>
       </div>
     );
