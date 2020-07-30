@@ -9,14 +9,24 @@ class ProductList extends React.Component {
     this.openDetails = this.openDetails.bind(this);
   }
 
-  addProductToCart (product) {
+  componentDidMount() {
+    const cart = JSON.parse(localStorage.getItem('depositório') || '[]');
+    if(cart.length === 0) {
+      localStorage.setItem('depositório', '[]');
+    }
+  }
+
+  addProductToCart(product) {
     const item = {
       id: product.id,
       title: product.title,
       price: product.price,
       thumbnail: product.thumbnail
-    }
-    localStorage.setItem('depositório', JSON.stringify(item));
+    };
+
+    const meuDepositorio = JSON.parse(localStorage.getItem('depositório'));
+    meuDepositorio.push(item);
+    localStorage.setItem('depositório', JSON.stringify(meuDepositorio));
   } 
 
   openDetails(detail) {
@@ -40,7 +50,10 @@ class ProductList extends React.Component {
             <img src={product.thumbnail} alt="Product" />
             <p>{`R$ ${Number(product.price).toFixed(2)}`}</p>
           </a>
-          <button onClick = {()=> {this.addProductToCart(product)}}>
+          <button
+            type="button"
+            data-testid="product-add-to-cart"
+            onClick = {()=> {this.addProductToCart(product)}}>
             Add to Cart
           </button>
         </div>

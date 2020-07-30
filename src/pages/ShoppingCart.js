@@ -6,6 +6,12 @@ class ShoppingCart extends React.Component {
     this.state = { products: [] };
   }
 
+  componentDidMount() {
+    const cart = JSON.parse(localStorage.getItem('depositório') || '[]');
+    if (cart.length === 0) localStorage.setItem('depositório', '[]');
+    this.setState({ products: cart });
+  }
+
   render() {
     const { products } = this.state;
     /* criando If/Else para mudar mensagem conforme conteudo no carrinho
@@ -17,13 +23,26 @@ class ShoppingCart extends React.Component {
         </div>
       );
     }
-    else if (products.length > 0) {
-      return (
-        <div className="add-to-cart" data-testid="product-add-to-cart">
-        </div>
-      )
-    }
-    return <div>Carrinho de Compras</div>;
+    return (
+      <div className="product-list">
+        {
+          products.map((product) => (
+            <div key={product.id} className="card" data-testid="product-add-to-cart">
+              <div className="card-header" data-testid="shopping-cart-product-name">
+                {product.title}
+              </div>
+              <div className="card-body">
+                <img src={product.thumbnail} alt="Product" />
+                <p>{`R$ ${Number(product.price).toFixed(2)}`}</p>
+              </div>
+              <div data-testid="shopping-cart-product-quantity">
+                10
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    )
   }
 }
 
