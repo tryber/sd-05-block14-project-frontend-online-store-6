@@ -1,6 +1,19 @@
 import React from 'react';
 import ProductDetails from './ProductDetails';
 
+function addProductToCart(product) {
+  const item = {
+    id: product.id,
+    title: product.title,
+    price: product.price,
+    thumbnail: product.thumbnail,
+  };
+
+  const meuDepositorio = JSON.parse(localStorage.getItem('depositório'));
+  meuDepositorio.push(item);
+  localStorage.setItem('depositório', JSON.stringify(meuDepositorio));
+}
+
 class ProductList extends React.Component {
   constructor(props) {
     super(props);
@@ -11,23 +24,10 @@ class ProductList extends React.Component {
 
   componentDidMount() {
     const cart = JSON.parse(localStorage.getItem('depositório') || '[]');
-    if(cart.length === 0) {
+    if (cart.length === 0) {
       localStorage.setItem('depositório', '[]');
     }
   }
-
-  addProductToCart(product) {
-    const item = {
-      id: product.id,
-      title: product.title,
-      price: product.price,
-      thumbnail: product.thumbnail
-    };
-
-    const meuDepositorio = JSON.parse(localStorage.getItem('depositório'));
-    meuDepositorio.push(item);
-    localStorage.setItem('depositório', JSON.stringify(meuDepositorio));
-  } 
 
   openDetails(detail) {
     this.setState({ product: detail });
@@ -53,7 +53,8 @@ class ProductList extends React.Component {
           <button
             type="button"
             data-testid="product-add-to-cart"
-            onClick = {()=> {this.addProductToCart(product)}}>
+            onClick={() => { addProductToCart(product); }}
+          >
             Add to Cart
           </button>
         </div>

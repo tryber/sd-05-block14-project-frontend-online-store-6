@@ -4,12 +4,17 @@ class ShoppingCart extends React.Component {
   constructor(props) {
     super(props);
     this.state = { products: [] };
+    this.fillCart = this.fillCart.bind(this);
   }
 
   componentDidMount() {
     const cart = JSON.parse(localStorage.getItem('depositório') || '[]');
     if (cart.length === 0) localStorage.setItem('depositório', '[]');
-    this.setState({ products: cart });
+    this.fillCart(cart);
+  }
+
+  fillCart(products) {
+    this.setState({ products });
   }
 
   render() {
@@ -39,7 +44,7 @@ class ShoppingCart extends React.Component {
                 10
               </div>
             </div>
-          ))
+          ));
         }
       </div>
     )
@@ -47,18 +52,3 @@ class ShoppingCart extends React.Component {
 }
 
 export default ShoppingCart;
-
-/* Adicione o atributo data-testid com o valor product-add-to-cart nos
-elementos que executam a ação de adicionar os produtos ao carrinho
-de compras.
-
-Desenvolva algo da forma simples: um elemento adiciona um produto.
-
-Adicione o atributo data-testid com o valor shopping-cart-product-name
-no elemento que possui o nome do produto na tela do carrinho de compras.
-Você deve adicionar esse atributo para todos os produtos.
-
-Adicione o atributo data-testid com o valor 
-shopping-cart-product-quantity no elemento que possui a quantidade
-do produto na tela do carrinho de compras. Você deve adicionar esse 
-atributo para todos os produtos. */
