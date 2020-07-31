@@ -14,7 +14,7 @@ function emptyCartElement() {
 
 class ShoppingCart extends React.Component {
   render() {
-    const products = CartSelection.getItems()
+    const products = CartSelection.getItems();
     if (products.length === 0) return emptyCartElement();
     return (
       <div className="product-list">

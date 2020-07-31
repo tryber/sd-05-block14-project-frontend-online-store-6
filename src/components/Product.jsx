@@ -18,8 +18,7 @@ class Product extends React.Component {
 
   render() {
     const { products } = this.state;
-    
-    return (
+    return(
       <div className="product-list">
         {
           products.map((product) => (

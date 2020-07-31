@@ -6,7 +6,6 @@ import ProductList from './pages/ProductList';
 import Categories from './components/Categories';
 import ShoppingCart from './pages/ShoppingCart';
 import svg from './img/shopping-cart.svg';
-import FinishPurchase from './pages/FinishPurchase';
 import SearchBar from './components/SearchBar';
 
 class App extends React.Component {
