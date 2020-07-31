@@ -11,7 +11,20 @@ function Button(props) {
     >
       {children}
     </button>
-  )
+  );
+}
+
+function CardBody(props) {
+  const { product } = props;
+  return (
+    <div className="card-body">
+      <img src={product.thumbnail} alt="Product" />
+      <p>{`R$ ${Number(product.price * product.amount).toFixed(2)}`}</p>
+      <div data-testid="shopping-cart-product-quantity">
+        {product.amount}
+      </div>
+    </div>
+  );
 }
 
 class Product extends React.Component {
@@ -21,17 +34,15 @@ class Product extends React.Component {
       <div className="product-list">
         {
           products.map((product) => (
-            <div key={`${product.id}${Math.random()}`} className="card" data-testid="product-add-to-cart">
+            <div
+              key={`${product.id}${Math.random()}`}
+              className="card"
+              data-testid="product-add-to-cart"
+            >
               <div className="card-header" data-testid="shopping-cart-product-name">
                 {product.title}
               </div>
-              <div className="card-body">
-                <img src={product.thumbnail} alt="Product" />
-                <p>{`R$ ${Number(product.price * product.amount).toFixed(2)}`}</p>
-              </div>
-              <div data-testid="shopping-cart-product-quantity">
-                {product.amount}
-              </div>
+              <CardBody product={product} />
               <div className="card-control">
                 <Button
                   testid="product-increase-quantity"

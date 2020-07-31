@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 function saveStorage(meuDepositorio) {
   localStorage.setItem('depositório', JSON.stringify(meuDepositorio));
 }
