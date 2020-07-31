@@ -27,23 +27,34 @@ class ShoppingCart extends React.Component {
     }
     return (
       <div className="product-list">
-        {
-          products.map((product) => (
-            <div key={product.id} className="card" data-testid="product-add-to-cart">
-              <div className="card-header" data-testid="shopping-cart-product-name">
-                {product.title}
-              </div>
-              <div className="card-body">
-                <img src={product.thumbnail} alt="Product" />
-                <p>{`R$ ${Number(product.price).toFixed(2)}`}</p>
-              </div>
-              <div data-testid="shopping-cart-product-quantity">
-                10
-              </div>
+        {products.map((product) => (
+          <div
+            key={product.id}
+            className="card"
+            data-testid="product-add-to-cart"
+          >
+            <div
+              className="card-header"
+              data-testid="shopping-cart-product-name"
+            >
+              {product.title}
             </div>
-          ))
-        }
-        <button onClick={() => { CartSelection.removeAll(); }}>Limpar carrinho</button>
+            <div className="card-body">
+              <img src={product.thumbnail} alt="Product" />
+              <p>{`R$ ${Number(product.price).toFixed(2)}`}</p>
+            </div>
+            <div data-testid="shopping-cart-product-quantity">
+              {product.amount}
+            </div>
+          </div>
+        ))}
+        <button
+          onClick={() => {
+            CartSelection.removeAll();
+          }}
+        >
+          Limpar carrinho
+        </button>
       </div>
     );
   }
