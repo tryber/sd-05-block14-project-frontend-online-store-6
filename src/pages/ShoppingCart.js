@@ -1,58 +1,53 @@
 import React from 'react';
 import CartSelection from '../services/cart';
+import Product from '../components/Product';
+
+function emptyCartElement() {
+  return (
+    <div className="empty-cart" data-testid="shopping-cart-empty-message">
+      Seu carrinho está vazio
+    </div>
+  );
+}
+
+function finishPurchaseElement() {
+  return (
+    <div>
+      <ShoppingCart />
+      <form>
+        <input type="text" data-testid="checkout-fullname" placeholder="Nome Completo" />
+        <input type="text" data-testid="checkout-email" placeholder="Email: exemplo@exem.com" />
+        <input type="text" data-testid="checkout-cpf" placeholder="CPF" />
+        <input type="text" data-testid="checkout-phone" placeholder="Telefone (XX) XXXX-XXXX" />
+        <input type="text" data-testid="checkout-cep" placeholder="CEP" />
+        <input type="text" data-testid="checkout-address" placeholder="Endereço" />
+      </form>
+    </div>
+  );
+}
 
 class ShoppingCart extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { products: [] };
-    this.fillCart = this.fillCart.bind(this);
-  }
-
-  componentDidMount() {
-    this.fillCart(CartSelection.getItems());
-  }
-
-  fillCart(products) {
-    this.setState({ products });
+  constructor() {
+    super();
+    this.state = { isFinished: false };
   }
 
   render() {
-    const { products } = this.state;
-    if (products.length === 0) {
-      return (
-        <div className="empty-cart" data-testid="shopping-cart-empty-message">
-          Seu carrinho está vazio
-        </div>
-      );
-    }
+    const products = CartSelection.getItems();
+    const { isFinished } = this.state;
+    if (isFinished) return finishPurchaseElement();
+    if (products.length === 0) return emptyCartElement();
     return (
       <div className="product-list">
-        {products.map((product) => (
-          <div
-            key={product.id}
-            className="card"
-            data-testid="product-add-to-cart"
-          >
-            <div
-              className="card-header"
-              data-testid="shopping-cart-product-name"
-            >
-              {product.title}
-            </div>
-            <div className="card-body">
-              <img src={product.thumbnail} alt="Product" />
-              <p>{`R$ ${Number(product.price).toFixed(2)}`}</p>
-            </div>
-            <div data-testid="shopping-cart-product-quantity">
-              {product.amount}
-            </div>
-          </div>
-        ))}
+        <Product />
         <button
-          onClick={() => {
-            CartSelection.removeAll();
-          }}
+          data-testid="checkout-products"
+          type="button"
+          onClick={() => { this.setState({ isFinished: true }); }}
         >
+          Finalizar Compra
+        </button>
+        <button type="button" onClick={() => { CartSelection.removeAll(); }}>
           Limpar carrinho
         </button>
       </div>
