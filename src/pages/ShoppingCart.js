@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import CartSelection from '../services/cart';
 import Product from '../components/Product';
-import FinishPurchase from '../pages/FinishPurchase';
+/* import FinishPurchase from '../pages/FinishPurchase'; */
 
 function emptyCartElement() {
   return (
@@ -21,14 +21,15 @@ class ShoppingCart extends React.Component {
         <Product />
         <Router>
           <Link to="FinishPurchase" data-testid="checkout-products">
-            <button>Finalizar Compra</button>
+            <button type="button">Finalizar Compra</button>
           </Link>
           <Switch>
-            <Route exact path="/FinishPurchase" component={FinishPurchase} />
+            <Route path="/FinishPurchase" component={FinishPurchase} />
           </Switch>
         </Router>
-        <button onClick={() => { CartSelection.removeAll(); }}>Limpar carrinho</button>
-        <button>Testando avaliador</button>
+        <button type="button" onClick={() => { CartSelection.removeAll(); }}>
+          Limpar carrinho
+        </button>
       </div>
     );
   }
