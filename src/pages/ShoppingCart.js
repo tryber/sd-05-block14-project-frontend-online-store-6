@@ -28,7 +28,6 @@ class ShoppingCart extends React.Component {
           </Switch>
         </Router>
         <button onClick={() => { CartSelection.removeAll(); }}>Limpar carrinho</button>
-        <button>Testando avaliador</button>
       </div>
     );
   }
