@@ -1,34 +1,31 @@
 import React from 'react';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import CartSelection from '../services/cart';
 import Product from '../components/Product';
+import FinishPurchase from '../pages/FinishPurchase';
+
+function emptyCartElement() {
+  return (
+    <div className="empty-cart" data-testid="shopping-cart-empty-message">
+      Seu carrinho está vazio
+    </div>
+  );
+}
 
 class ShoppingCart extends React.Component {
-
-  componentDidMount() {
-    this.fillCart(CartSelection.getItems());
-  }
-
-  fillCart(products) {
-    this.setState({ products });
-  }
-
   render() {
-    const { products } = this.state;
-    if (products.length === 0) {
-      return (
-        <div className="empty-cart" data-testid="shopping-cart-empty-message">
-          Seu carrinho está vazio
-        </div>
-      );
-    }
+    const products = CartSelection.getItems()
+    if (products.length === 0) return emptyCartElement();
     return (
       <div className="product-list">
         <Product />
         <Router>
-          <Link to="/pages/FinishPurchase" data-testid="checkout-products">
+          <Link to="FinishPurchase" data-testid="checkout-products">
             <button>Finalizar Compra</button>
           </Link>
+          <Switch>
+            <Route exact path="/FinishPurchase" component={FinishPurchase} />
+          </Switch>
         </Router>
         <button onClick={() => { CartSelection.removeAll(); }}>Limpar carrinho</button>
       </div>

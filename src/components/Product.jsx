@@ -18,13 +18,7 @@ class Product extends React.Component {
 
   render() {
     const { products } = this.state;
-    if (products.length === 0) {
-      return (
-        <div className="empty-cart" data-testid="shopping-cart-empty-message">
-          Seu carrinho está vazio
-        </div>
-      );
-    }
+    
     return (
       <div className="product-list">
         {

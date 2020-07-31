@@ -68,7 +68,6 @@ class App extends React.Component {
             <Switch>
               <Route exact path="/" render={this.elementProductList} />
               <Route path="/ShoppingCart" component={ShoppingCart} />
-              <Route path="/pages/FinishPurchase" component={FinishPurchase} />
             </Switch>
           </div>
         </Router>
