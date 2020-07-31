@@ -27,6 +27,19 @@ function CardBody(props) {
   );
 }
 
+function addProduct(product) {
+  CartSelection.addItem(product);
+}
+
+function removeProduct(product) {
+  if (product.amount > 1) CartSelection.removeItem(product.id);
+  else CartSelection.deleteItem(product.id);
+}
+
+function createKey() {
+  return (Math.floor(Math.random() * 1E7)).toString();
+}
+
 class Product extends React.Component {
   render() {
     const products = CartSelection.getItems();
@@ -34,11 +47,7 @@ class Product extends React.Component {
       <div className="product-list">
         {
           products.map((product) => (
-            <div
-              key={`${product.id}${Math.random()}`}
-              className="card"
-              data-testid="product-add-to-cart"
-            >
+            <div key={createKey()} className="card" data-testid="product-add-to-cart">
               <div className="card-header" data-testid="shopping-cart-product-name">
                 {product.title}
               </div>
@@ -46,20 +55,13 @@ class Product extends React.Component {
               <div className="card-control">
                 <Button
                   testid="product-increase-quantity"
-                  event={() => {
-                    CartSelection.addItem(product);
-                    this.forceUpdate();
-                  }}
+                  event={() => { addProduct(product); this.forceUpdate(); }}
                 >
                   Add
                 </Button>
                 <Button
                   testid="product-decrease-quantity"
-                  event={() => {
-                    if (product.amount > 1) CartSelection.removeItem(product.id);
-                    else CartSelection.deleteItem(product.id);
-                    this.forceUpdate();
-                  }}
+                  event={() => { removeProduct(product); this.forceUpdate(); }}
                 >
                   Remove
                 </Button>
