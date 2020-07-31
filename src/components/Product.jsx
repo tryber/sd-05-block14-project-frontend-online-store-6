@@ -31,8 +31,10 @@ class Product extends React.Component {
                 <p>{`R$ ${Number(product.price).toFixed(2)}`}</p>
               </div>
               <div data-testid="shopping-cart-product-quantity">
-                10
+                {product.amount}
               </div>
+              <button data-testid="product-increase-quantity" onClick={()=>{CartSelection.addItem(product)}}>Add</button>
+              <button data-testid="product-decrease-quantity" onClick={()=>{CartSelection.removeItem(product.amount)}}>Remove</button>
             </div>
           ))
         }
