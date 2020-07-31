@@ -1,32 +1,54 @@
-const cartSelection = {
+/* eslint-disable no-param-reassign */
+function saveStorage(meuDepositorio) {
+  localStorage.setItem('depositório', JSON.stringify(meuDepositorio));
+}
+
+function loadStorage() {
+  return JSON.parse(localStorage.getItem('depositório') || '[]');
+}
+
+export default {
   create: () => {
-    const cart = JSON.parse(localStorage.getItem('depositório') || '[]');
-    if (cart.length === 0) {
-      localStorage.setItem('depositório', '[]');
-    }
+    if (loadStorage() === 0) saveStorage([]);
   },
-  getItems: () => (
-    JSON.parse(localStorage.getItem('depositório') || '[]')
-  ),
+
+  getItems: () => loadStorage(),
+
   addItem: (product) => {
+    const meuDepositorio = loadStorage();
     const item = {
       id: product.id,
       title: product.title,
       price: product.price,
       thumbnail: product.thumbnail,
+      amount: 1,
     };
-    const meuDepositorio = JSON.parse(localStorage.getItem('depositório') || '[]');
-    meuDepositorio.push(item);
-    localStorage.setItem('depositório', JSON.stringify(meuDepositorio));
+    let exists = false;
+    meuDepositorio
+      .forEach((element) => {
+        exists = (exists || item.id === element.id);
+        if (exists) element.amount += 1;
+      });
+    if (!exists) meuDepositorio.push(item);
+    saveStorage(meuDepositorio);
   },
-  removeItem: (productId) => {
-    const meuDepositorio = JSON.parse(localStorage.getItem('depositório'));
-    const newDepositorio = meuDepositorio.filter(({ id }) => (id !== productId));
-    localStorage.setItem('depositório', JSON.stringify(newDepositorio));
+
+  removeItem: (id, qtd = 1) => {
+    const meuDepositorio = loadStorage();
+    meuDepositorio
+      .forEach((element) => {
+        if (element.id === id && element.amount > 0) element.amount -= qtd;
+      });
+    saveStorage(meuDepositorio);
   },
+
+  deleteItem: (id) => {
+    const meuDepositorio = loadStorage();
+    const newDepositorio = meuDepositorio.filter(({ id: unique }) => (unique !== id));
+    saveStorage(newDepositorio);
+  },
+
   removeAll: () => {
-    localStorage.setItem('depositório', '[]');
+    saveStorage([]);
   },
 };
-
-export default cartSelection;
