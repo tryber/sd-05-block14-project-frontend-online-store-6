@@ -40,16 +40,19 @@ class ShoppingCart extends React.Component {
     return (
       <div className="product-list">
         <Product />
-        <button
-          data-testid="checkout-products"
-          type="button"
-          onClick={() => { this.setState({ isFinished: true }); }}
-        >
-          Finalizar Compra
-        </button>
-        <button type="button" onClick={() => { CartSelection.removeAll(); }}>
-          Limpar carrinho
-        </button>
+        <div>
+          <button
+            data-testid="checkout-products"
+            type="button"
+            onClick={() => { this.setState({ isFinished: true }); }}
+          >
+            Finalizar Compra
+          </button>
+          <button type="button" onClick={() => { CartSelection.removeAll(); }}>
+            Limpar carrinho
+          </button>
+        </div>
+
       </div>
     );
   }
