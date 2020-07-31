@@ -29,7 +29,7 @@ function finishPurchaseElement() {
 class ShoppingCart extends React.Component {
   constructor() {
     super();
-    this.state = { isFinished: false }
+    this.state = { isFinished: false };
   }
 
   render() {
@@ -43,7 +43,7 @@ class ShoppingCart extends React.Component {
         <button
           data-testid="checkout-products"
           type="button"
-          onClick={() => { this.setState({ isFinished: true })}}
+          onClick={() => { this.setState({ isFinished: true }); }}
         >
           Finalizar Compra
         </button>
