@@ -15,7 +15,6 @@ export default {
     const meuDepositorio = loadStorage();
     const item = {
       id: product.id,
-      unique: `${product.id}-${Math.floor(Math.random() * 1E7)}`,
       title: product.title,
       price: product.price,
       thumbnail: product.thumbnail,
@@ -30,17 +29,17 @@ export default {
     if (!exists) meuDepositorio.push(item);
     saveStorage(meuDepositorio);
   },
-  removeItem: (unique, amount = 1) => {
+  removeItem: (id, qtd = 1) => {
     const meuDepositorio = loadStorage();
     meuDepositorio
       .forEach((element) => {
-        if (unique === element.unique && element.amount > 0) element.amount -= amount;
+        if (element.id === id && element.amount > 0) element.amount -= qtd;
       });
     saveStorage(meuDepositorio);
   },
-  deleteItem: (unique) => {
+  deleteItem: (id) => {
     const meuDepositorio = loadStorage();
-    const newDepositorio = meuDepositorio.filter(({ unique: un }) => (un !== unique));
+    const newDepositorio = meuDepositorio.filter(({ id: unique }) => (unique !== id));
     saveStorage(newDepositorio);
   },
   removeAll: () => {
