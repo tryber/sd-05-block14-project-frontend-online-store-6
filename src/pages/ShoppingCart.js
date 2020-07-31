@@ -1,8 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import CartSelection from '../services/cart';
 import Product from '../components/Product';
-import FinishPurchase from '../pages/FinishPurchase';
 
 function emptyCartElement() {
   return (
@@ -12,13 +10,37 @@ function emptyCartElement() {
   );
 }
 
+function finishPurchaseElement() {
+  return (
+    <div>
+      <ShoppingCart />
+      <form>
+        <input type="text" data-testid="checkout-fullname" placeholder="Nome Completo" />
+        <input type="text" data-testid="checkout-email" placeholder="Email: exemplo@exem.com" />
+        <input type="text" data-testid="checkout-cpf" placeholder="CPF" />
+        <input type="text" data-testid="checkout-phone" placeholder="Telefone (XX) XXXX-XXXX" />
+        <input type="text" data-testid="checkout-cep" placeholder="CEP" />
+        <input type="text" data-testid="checkout-address" placeholder="Endereço" />
+      </form>
+    </div>
+  );
+}
+
 class ShoppingCart extends React.Component {
+  constructor() {
+    super();
+    this.state = { isFinished: false };
+  }
+
   render() {
     const products = CartSelection.getItems();
+    const { isFinished } = this.state;
+    if (isFinished) return finishPurchaseElement();
     if (products.length === 0) return emptyCartElement();
     return (
       <div className="product-list">
         <Product />
+<<<<<<< HEAD
         <Router>
           <Link to="FinishPurchase" data-testid="checkout-products">
             <button>Finalizar Compra</button>
@@ -28,6 +50,18 @@ class ShoppingCart extends React.Component {
           </Switch>
         </Router>
         <button onClick={() => { CartSelection.removeAll(); }}>Limpar carrinho</button>
+=======
+        <button
+          data-testid="checkout-products"
+          type="button"
+          onClick={() => { this.setState({ isFinished: true }); }}
+        >
+          Finalizar Compra
+        </button>
+        <button type="button" onClick={() => { CartSelection.removeAll(); }}>
+          Limpar carrinho
+        </button>
+>>>>>>> 63e95f8aa3122e0e6c29233b36640184f865e37c
       </div>
     );
   }
